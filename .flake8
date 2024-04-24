@@ -1,6 +1,2 @@
 [flake8]
-exclude =
-    /app/src/models/migrations
-    /src/grpc_service/protos/builds/
-    /tests/
 max-complexity = 10
