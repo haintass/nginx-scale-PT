@@ -9,6 +9,7 @@ from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.exception_handlers import http_exception_handler
 from fastapi.responses import ORJSONResponse
 
+from src.api.v1 import common_router
 from src.core import logger
 from src.core.config.app_settings import AppSettings
 from src.db import redis as redis_app
@@ -54,6 +55,8 @@ async def unhandled_exception_handler(request: Request, exc: Exception) -> ORJSO
         HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, "Internal server error"),
     )
 
+
+app.include_router(common_router, prefix="/api/v1")
 
 if __name__ == "__main__":
     uvicorn.run(
