@@ -21,30 +21,25 @@ repos:
     rev: 5.12.0
     hooks:
       - id: isort
-        exclude: ^src/grpc_service/protos/builds/|tests
         args: [ --filter-files, --profile, black ]
   - repo: https://github.com/psf/black
     rev: 23.7.0
     hooks:
       - id: black
-        exclude: ^src/grpc_service/protos/builds/|tests
         args: [ --line-length=120]
   - repo: https://github.com/fsouza/autoflake8
     rev: v0.4.0
     hooks:
       - id: autoflake8
-        exclude: ^src/grpc_service/protos/builds/|tests
   - repo: https://github.com/pycqa/flake8
     rev: 6.0.0
     hooks:
       - id: flake8
-        exclude: ^src/grpc_service/protos/builds/|tests
         args: [--max-line-length=120]
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: 'v1.4.1'
     hooks:
       - id: mypy
-        exclude: ^src/grpc_service/protos/builds/|tests
         args: [ --ignore-missing-imports, --no-warn-unused-ignores ]
         additional_dependencies:
           - 'pydantic'
