@@ -1,0 +1,51 @@
+### Quickstart
+# 1. Install poetry: pip install poetry
+# 2. Install dependencies: poetry install
+# 3. Add pre-commit to your project: poetry add --dev pre-commit
+# 4. Setup hooks: poetry run pre-commit install
+
+### Usage:
+# 1. Run checks automatically on each commit
+# 2. Run checks on staged files manually: poetry run pre-commit
+# 3. Run checks on all files manually: poetry run pre-commit run --all-files
+# 4. Skip checks on commit: add --no-verify to your git commit
+# 5. Delete hooks: rm -rf .git/hooks/pre-commit
+
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+
+# Feel free to update for your needs. Changes may require to reinstall hooks.
+default_stages: [commit, push, manual]
+repos:
+  - repo: https://github.com/pycqa/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        exclude: ^src/grpc_service/protos/builds/|tests
+        args: [ --filter-files, --profile, black ]
+  - repo: https://github.com/psf/black
+    rev: 23.7.0
+    hooks:
+      - id: black
+        exclude: ^src/grpc_service/protos/builds/|tests
+        args: [ --line-length=120]
+  - repo: https://github.com/fsouza/autoflake8
+    rev: v0.4.0
+    hooks:
+      - id: autoflake8
+        exclude: ^src/grpc_service/protos/builds/|tests
+  - repo: https://github.com/pycqa/flake8
+    rev: 6.0.0
+    hooks:
+      - id: flake8
+        exclude: ^src/grpc_service/protos/builds/|tests
+        args: [--max-line-length=120]
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: 'v1.4.1'
+    hooks:
+      - id: mypy
+        exclude: ^src/grpc_service/protos/builds/|tests
+        args: [ --ignore-missing-imports, --no-warn-unused-ignores ]
+        additional_dependencies:
+          - 'pydantic'
+          - 'redis'

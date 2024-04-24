@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "Test project"
+version = "0.1.0"
+description = ""
+authors = ["Evgeny Kulakov <haintass@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.110.2"
+pydantic = "^2.7.1"
+pydantic-settings = "^2.2.1"
+orjson = "^3.9.7"
+uvicorn = {version = "^0.23.2", extras = ["standard"]}
+gunicorn = "^21.2.0"
+structlog = "^23.1.0"
+redis = "^5.0.3"
+
+
+[[tool.poetry.source]]
+name = "PyPI"
+priority = "primary"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "*"
+pylint = "*"
+flake8 = "*"
+autopep8 = "*"
+pre-commit = "^3.4.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
